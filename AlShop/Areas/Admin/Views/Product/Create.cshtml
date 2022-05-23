@@ -1,0 +1,62 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Ürün Ekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+            <h4 class="text-primary text-center">Ürün Ekle</h4>
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    Ad
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Açıklama
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Fiyat
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Resim<br />
+                    <input asp-for="Image" type="file" />
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsHome" /> Ana Sayfa
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsStock" /> Stok
+                    </label>
+                </div>
+                <div class="form-group">
+                    Kategori
+                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success"><i class="bi bi-plus-lg"></i> Ekle</button>
+                    <a asp-action="Index" class="btn btn-danger"><i class="bi bi-arrow-return-left"></i> Geri Dön</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

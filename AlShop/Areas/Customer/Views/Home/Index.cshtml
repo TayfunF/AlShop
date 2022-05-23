@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <ul class="list-group">
+                    <li class="list-group-item active" aria-current="true">An active item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                    <li class="list-group-item">A fourth item</li>
+                    <li class="list-group-item">And a fifth one</li>
+                </ul>
+            </div>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        @item.Title
+                    </div>
+                    <img src="@item.Image" style="width:225px; height:250px;" class="card-img-top" alt="Resim Yok">
+                    <div class="card-body">
+                        <p class="card-text">@item.Description</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <label style="font-size:20px; color:crimson;">
+                        <b>
+                            @if (item.IsHome && (item.IsHome && item.IsStock))
+                            {
+                                @item.Price.ToString("0.00") <span>₺</span>
+                            }
+                            else
+                            {
+                                <label class="text-light bg-danger form-control"><i class="bi bi-x-lg"></i> Tükendi</label>
+                            }
+                        </b>
+                    </label>
+                    <a asp-action="Details" asp-controller="Home" asp-route-id="@item.Id" class="btn btn-outline-info" style="float:right;"><i class="bi bi-box-arrow-in-up-right"></i> Detay</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
